@@ -21,6 +21,9 @@ public class SnakeGame {
 
         gridManager = new GridManager(canvas);
         gridManager.createGrid();
+
+        Apple apple = new Apple();
+        canvas.add(apple.getGraphics());
     }
 
     public static void main(String[] args) {
