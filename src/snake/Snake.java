@@ -1,5 +1,6 @@
 package snake;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.GraphicsObject;
 import edu.macalester.graphics.Rectangle;
 import java.awt.Color;
 
@@ -18,5 +19,23 @@ public class Snake {
         length = 1;
     }
 
+
+    public GraphicsGroup getGraphics() {
+        return snakeGraphics;
+    }
+
+    public int getLength() {
+        return length;
+    }
+
+    public void eatApple(Apple apple) {
+        if (snake.getX() == apple.getX() && snake.getY() == apple.getY()) {
+            grow();
+        }
+    }
+
+    public void grow() {
+        length++;
+    }
 
 }

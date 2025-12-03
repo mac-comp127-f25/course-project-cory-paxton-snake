@@ -44,6 +44,6 @@ public class Apple {
     public int getY() {
         return (int) apple.getY();
     }
-    
+
 
 }
