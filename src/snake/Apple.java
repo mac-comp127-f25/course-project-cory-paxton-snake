@@ -37,4 +37,13 @@ public class Apple {
         return appleGraphics;
     }
 
+    public int getX() {
+        return (int) apple.getX();
+    }
+
+    public int getY() {
+        return (int) apple.getY();
+    }
+    
+
 }
