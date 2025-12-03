@@ -13,7 +13,7 @@ public class GridManager {
 
     private CanvasWindow canvas;
     private GraphicsGroup grid;
-    private List<GridSquare> gridSquares;
+    private static List<GridSquare> gridSquares;
 
     public GridManager(CanvasWindow canvas) {
         gridSquares = new ArrayList<>();
@@ -60,6 +60,10 @@ public class GridManager {
         }
 
         canvas.add(grid);
+    }
+
+    public static List<GridSquare> getGridSquares() {
+        return gridSquares;
     }
 
     private boolean isEven(int x) {
