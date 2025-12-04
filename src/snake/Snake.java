@@ -16,7 +16,7 @@ public class Snake {
         snake.setFilled(true);
         snake.setStroked(false);
         snakeGraphics.add(snake);
-        length = 1;
+        this.length = 1;
     }
 
 
