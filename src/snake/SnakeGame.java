@@ -2,6 +2,8 @@ package snake;
 
 import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.GraphicsText;
+import edu.macalester.graphics.TextAlignment;
 import edu.macalester.graphics.events.Key;
 
 public class SnakeGame {
@@ -19,6 +21,12 @@ public class SnakeGame {
     private Snake snake;
     private Apple apple;
 
+    private double moveTimer = 0;
+    private double updateInterval = 0.2;
+
+    private boolean snakeGrowsNextMove = false;
+    private boolean gameOver = false;
+
     public SnakeGame() {
         canvas = new CanvasWindow("SNAKE", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLUE);
@@ -26,14 +34,16 @@ public class SnakeGame {
         gridManager = new GridManager(canvas);
         snake = new Snake(9, 9);
 
+        setupElements();
+
         apple = new Apple();
+        apple.respawn();
         canvas.add(apple.getGraphics());
 
-        setupElements();
         setupKeyListener();
 
-        canvas.animate(() -> {
-            snake.move(canvas);
+        canvas.animate(dt -> {
+            update(dt);
         });
     }
 
@@ -50,7 +60,16 @@ public class SnakeGame {
     }
 
     private void update(double dt) {
+        if(gameOver) {
+            return; // todo: add game over logic
+        }
 
+        moveTimer += dt;
+        if(moveTimer > updateInterval) {
+            moveSnake();
+            moveTimer = 0;
+            // updateInterval *= 0.95;
+        }
     }
 
     private void setupKeyListener() {
@@ -70,5 +89,45 @@ public class SnakeGame {
                     break;
             }
         });
+    }
+
+    private void moveSnake() {
+        snake.move(snakeGrowsNextMove, canvas);
+
+        snakeGrowsNextMove = false;
+
+        // wall collision
+        collidedWithWall();
+        // self collision
+        collidedWithSnake();
+        // food collision
+    }
+
+    private void collidedWithWall() {
+        int headX = snake.getSegments().get(0).getX();
+        int headY = snake.getSegments().get(0).getY();
+
+        if(headX < 0 || headX >= 19 || 
+            headY < 0 || headY >= 19) {
+                gameOver();
+            }
+    }
+
+    private void collidedWithSnake() {
+        if(snake.collidedWithSelf()) {
+            gameOver();
+        }
+    }
+
+    private void gameOver() {
+        gameOver = true;
+
+        GraphicsText text = new GraphicsText("GAME OVER!\nSCORE - " + snake.getSegments().size());
+        text.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2);
+        text.setFillColor(Color.RED);
+        text.setFilled(true);
+        text.setAlignment(TextAlignment.CENTER);
+        text.setFontSize(72);
+        canvas.add(text);
     }
 }
