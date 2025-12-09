@@ -24,17 +24,12 @@ public class SnakeGame {
         canvas.setBackground(Color.BLUE);
 
         gridManager = new GridManager(canvas);
-        gridManager.createGrid();
-
-        snake = new Snake(9 * GridSquare.TILE_SIZE, 9 * GridSquare.TILE_SIZE);
-
-        for(SnakeSegment segment : snake.getSegments()) {
-            canvas.add(segment.getGraphics());
-        }
+        snake = new Snake(9, 9);
 
         apple = new Apple();
         canvas.add(apple.getGraphics());
 
+        setupElements();
         setupKeyListener();
 
         canvas.animate(() -> {
@@ -44,6 +39,14 @@ public class SnakeGame {
 
     public static void main(String[] args) {
         new SnakeGame();
+    }
+
+    public void setupElements() {
+        gridManager.createGrid();
+
+        for(SnakeSegment segment : snake.getSegments()) {
+            canvas.add(segment.getGraphics());
+        }
     }
 
     private void update(double dt) {

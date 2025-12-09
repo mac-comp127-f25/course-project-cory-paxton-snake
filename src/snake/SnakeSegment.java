@@ -16,7 +16,7 @@ public class SnakeSegment {
         this.gridX = gridX;
         this.gridY = gridY;
 
-        snakeSegment = new Rectangle(gridX, gridY, GridSquare.TILE_SIZE, GridSquare.TILE_SIZE);
+        snakeSegment = new Rectangle(gridX * GridSquare.TILE_SIZE, gridY * GridSquare.TILE_SIZE, GridSquare.TILE_SIZE, GridSquare.TILE_SIZE);
         snakeSegment.setFillColor(Color.GREEN);
         snakeSegment.setFilled(true);
         snakeSegment.setStroked(false);
