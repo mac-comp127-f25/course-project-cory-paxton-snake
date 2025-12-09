@@ -4,6 +4,7 @@ import java.awt.Color;
 import java.util.List;
 import java.util.Random;
 import edu.macalester.graphics.GraphicsGroup;
+import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.Ellipse;
 
 public class Apple {
@@ -15,31 +16,27 @@ public class Apple {
     private static final int GRID_SIZE = 19;
     
     public Apple() {
-        appleGraphics = new GraphicsGroup();
-        apple = createApple();
-        appleGraphics.add(apple);
+        apple = new Ellipse(0, 0, GridSquare.TILE_SIZE / 2, GridSquare.TILE_SIZE / 2);
+        apple.setFillColor(Color.RED);
     }
 
-    private Ellipse createApple() {
+    public void respawn() {
         Random rand = new Random();
-        int gridX = rand.nextInt(GRID_SIZE);
-        int gridY = rand.nextInt(GRID_SIZE);
 
         List<GridSquare> gridSquares = GridManager.getGridSquares();
-        GridSquare randGridSquare = gridSquares.get(rand.nextInt(gridSquares.size() - 1));
+        System.out.println(gridSquares.size());
+        GridSquare randGridSquare = gridSquares.get(rand.nextInt(gridSquares.size()));
 
         int x = randGridSquare.getGridX() * GridSquare.TILE_SIZE;
         int y = randGridSquare.getGridY() * GridSquare.TILE_SIZE;
 
         randGridSquare.setHasFood(true);
 
-        Ellipse apple = new Ellipse(x + GridSquare.TILE_SIZE / 4, y + GridSquare.TILE_SIZE / 4, GridSquare.TILE_SIZE / 2, GridSquare.TILE_SIZE / 2);
-        apple.setFillColor(RED);
-        return apple;
+        apple.setPosition(x + GridSquare.TILE_SIZE / 4, y + GridSquare.TILE_SIZE / 4);
     }
 
-    public GraphicsGroup getGraphics() {
-        return appleGraphics;
+    public Ellipse getGraphics() {
+        return apple;
     }
 
     public int getX() {
@@ -49,6 +46,4 @@ public class Apple {
     public int getY() {
         return (int) apple.getY();
     }
-
-
 }
