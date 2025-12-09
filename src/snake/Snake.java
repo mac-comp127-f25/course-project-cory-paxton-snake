@@ -49,7 +49,7 @@ public class Snake {
         direction = newDirection;
     }
 
-    public void move(CanvasWindow canvas) {
+    public void move(boolean grow, CanvasWindow canvas) {
         SnakeSegment head = segments.get(0);
         int newX = head.getX();
         int newY = head.getY();
@@ -70,9 +70,30 @@ public class Snake {
         }
 
         SnakeSegment newHead = new SnakeSegment(newX, newY);
-        canvas.remove(segments.get(segments.size() - 1).getGraphics());
-        segments.remove(segments.size() - 1);
+
         canvas.add(newHead.getGraphics());
-        segments.add(0, newHead);       
+        segments.add(0, newHead); 
+
+        if(!grow) {
+            canvas.remove(segments.get(segments.size() - 1).getGraphics());
+            segments.remove(segments.size() - 1);
+        } 
+    }
+
+    public boolean collidedWithSelf() {
+        int headX = segments.get(0).getX();
+        int headY = segments.get(0).getY();
+
+        if(segments.size() <= 1) {
+            return false;
+        }
+
+        for(SnakeSegment segment : segments) {
+            if(segment.getX() == headX && segment.getY() == headY) {
+                return true;
+            }
+        }
+
+        return false;
     }
 }
