@@ -13,6 +13,7 @@ public class GridSquare {
     private int gridX;  // Local grid coordinate x
     private int gridY;  // Local grid coordinate y
     private boolean hasConsumable; // If the grid square has a consumable
+    private boolean hasSnake; // If the grid square has the snake
 
     private Rectangle gridSquare;
 
@@ -25,6 +26,7 @@ public class GridSquare {
         this.gridX = gridX;
         this.gridY = gridY;
         this.hasConsumable = false;
+        this.hasSnake = false;
     }
 
     public Rectangle getGraphics() {
@@ -46,4 +48,8 @@ public class GridSquare {
     public void setHasFood(boolean food) {
         this.hasConsumable = food;
     } 
+
+    public boolean hasSnake() {
+        return this.hasSnake;
+    }
 }

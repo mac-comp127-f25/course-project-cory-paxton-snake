@@ -31,7 +31,7 @@ public class Apple {
         int x = randGridSquare.getGridX() * GridSquare.TILE_SIZE;
         int y = randGridSquare.getGridY() * GridSquare.TILE_SIZE;
 
-        //randGridSquare.setHasFood(true);
+        randGridSquare.setHasFood(true);
 
         Ellipse apple = new Ellipse(x + GridSquare.TILE_SIZE / 4, y + GridSquare.TILE_SIZE / 4, GridSquare.TILE_SIZE / 2, GridSquare.TILE_SIZE / 2);
         apple.setFillColor(RED);

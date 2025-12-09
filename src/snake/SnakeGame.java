@@ -2,6 +2,7 @@ package snake;
 
 import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.events.Key;
 
 public class SnakeGame {
     private static final int CANVAS_WIDTH = 570;
@@ -15,6 +16,9 @@ public class SnakeGame {
     private final CanvasWindow canvas;
     private final GridManager gridManager;
 
+    private Snake snake;
+    private Apple apple;
+
     public SnakeGame() {
         canvas = new CanvasWindow("SNAKE", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLUE);
@@ -22,13 +26,46 @@ public class SnakeGame {
         gridManager = new GridManager(canvas);
         gridManager.createGrid();
 
-        Apple apple = new Apple();
+        snake = new Snake(9 * GridSquare.TILE_SIZE, 9 * GridSquare.TILE_SIZE);
+
+        for(SnakeSegment segment : snake.getSegments()) {
+            canvas.add(segment.getGraphics());
+        }
+
+        apple = new Apple();
         canvas.add(apple.getGraphics());
+
+        setupKeyListener();
+
+        canvas.animate(() -> {
+            snake.move(canvas);
+        });
     }
 
     public static void main(String[] args) {
         new SnakeGame();
     }
 
-    
+    private void update(double dt) {
+
+    }
+
+    private void setupKeyListener() {
+        canvas.onKeyDown(event -> {
+            switch(event.getKey()) {
+                case UP_ARROW:
+                    snake.setDirection(Snake.Direction.UP);
+                    break;
+                case DOWN_ARROW:
+                    snake.setDirection(Snake.Direction.DOWN);
+                    break;
+                case RIGHT_ARROW:
+                    snake.setDirection(Snake.Direction.RIGHT);
+                    break;
+                case LEFT_ARROW:
+                    snake.setDirection(Snake.Direction.LEFT);
+                    break;
+            }
+        });
+    }
 }
