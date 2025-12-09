@@ -3,17 +3,14 @@ package snake;
 import java.awt.Color;
 import java.util.List;
 import java.util.Random;
-import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.CanvasWindow;
+
 import edu.macalester.graphics.Ellipse;
 
 public class Apple {
-    private GraphicsGroup appleGraphics;
     private final Ellipse apple;
 
-    private final Color RED = new Color(255,0,0);
-    
-    private static final int GRID_SIZE = 19;
+    private int appleX;
+    private int appleY;
     
     public Apple() {
         apple = new Ellipse(0, 0, GridSquare.TILE_SIZE / 2, GridSquare.TILE_SIZE / 2);
@@ -26,6 +23,9 @@ public class Apple {
         List<GridSquare> gridSquares = GridManager.getGridSquares();
         System.out.println(gridSquares.size());
         GridSquare randGridSquare = gridSquares.get(rand.nextInt(gridSquares.size()));
+
+        this.appleX = randGridSquare.getGridX();
+        this.appleY = randGridSquare.getGridY();
 
         int x = randGridSquare.getGridX() * GridSquare.TILE_SIZE;
         int y = randGridSquare.getGridY() * GridSquare.TILE_SIZE;
@@ -40,10 +40,10 @@ public class Apple {
     }
 
     public int getX() {
-        return (int) apple.getX();
+        return appleX;
     }
 
     public int getY() {
-        return (int) apple.getY();
+        return appleY;
     }
 }

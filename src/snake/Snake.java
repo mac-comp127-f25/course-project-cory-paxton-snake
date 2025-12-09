@@ -1,21 +1,17 @@
 package snake;
+
 import edu.macalester.graphics.CanvasWindow;
-import edu.macalester.graphics.GraphicsGroup;
-import edu.macalester.graphics.GraphicsObject;
-import edu.macalester.graphics.Rectangle;
-import java.awt.Color;
+
 import java.util.ArrayList;
 import java.util.List;
 
 public class Snake {
     private List<SnakeSegment> segments;
-    private GraphicsGroup snakeSegments;
 
     public enum Direction { UP, DOWN, LEFT, RIGHT }
     private Direction direction = Direction.RIGHT; // default direction
 
     public Snake(int startX, int startY) {
-        snakeSegments = new GraphicsGroup();
         segments = new ArrayList<>();
 
         SnakeSegment startingSegment = new SnakeSegment(startX, startY);
@@ -29,12 +25,6 @@ public class Snake {
 
     public int getLength() {
         return segments.size();
-    }
-
-    public void eatApple(Apple apple) {
-        // if (snakeSegment.getX() == apple.getX() && snakeSegment.getY() == apple.getY()) {
-        //     grow();
-        // }
     }
 
     public void setDirection(Direction newDirection) {
@@ -84,12 +74,8 @@ public class Snake {
         int headX = segments.get(0).getX();
         int headY = segments.get(0).getY();
 
-        if(segments.size() <= 1) {
-            return false;
-        }
-
-        for(SnakeSegment segment : segments) {
-            if(segment.getX() == headX && segment.getY() == headY) {
+        for(int i = 1; i < segments.size(); i++) {
+            if(segments.get(i).getX() == headX && segments.get(i).getY() == headY) {
                 return true;
             }
         }

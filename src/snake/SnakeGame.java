@@ -96,11 +96,10 @@ public class SnakeGame {
 
         snakeGrowsNextMove = false;
 
-        // wall collision
         collidedWithWall();
-        // self collision
         collidedWithSnake();
-        // food collision
+        // TODO: food collision
+        collidedWithFood();
     }
 
     private void collidedWithWall() {
@@ -119,15 +118,25 @@ public class SnakeGame {
         }
     }
 
+    private void collidedWithFood() {
+        int headX = snake.getSegments().get(0).getX();
+        int headY = snake.getSegments().get(0).getY();
+
+        if(headX == apple.getX() && headY == apple.getY()) {
+            snakeGrowsNextMove = true;
+            apple.respawn();
+        }
+    }
+
     private void gameOver() {
         gameOver = true;
 
-        GraphicsText text = new GraphicsText("GAME OVER!\nSCORE - " + snake.getSegments().size());
-        text.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2);
+        GraphicsText text = new GraphicsText("GAME OVER!\nSCORE: " + snake.getSegments().size());
         text.setFillColor(Color.RED);
         text.setFilled(true);
         text.setAlignment(TextAlignment.CENTER);
         text.setFontSize(72);
+        text.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2);
         canvas.add(text);
     }
 }
