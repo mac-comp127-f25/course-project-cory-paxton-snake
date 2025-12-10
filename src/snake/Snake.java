@@ -74,7 +74,7 @@ public class Snake {
         int headX = segments.get(0).getX();
         int headY = segments.get(0).getY();
 
-        for(int i = 1; i < segments.size(); i++) {
+        for(int i = 3; i < segments.size(); i++) {
             if(segments.get(i).getX() == headX && segments.get(i).getY() == headY) {
                 return true;
             }
