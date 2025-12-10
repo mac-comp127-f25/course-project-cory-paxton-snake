@@ -3,7 +3,6 @@ package snake;
 import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.FontStyle;
-import edu.macalester.graphics.GraphicsGroup;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.TextAlignment;
 
@@ -179,6 +178,8 @@ public class SnakeGame {
     private void gameOver() {
         gameOver = true;
 
+        canvas.removeAll();
+
         GraphicsText text = new GraphicsText("GAME OVER!\nSCORE: " + snake.getSegments().size());
         text.setFillColor(Color.RED);
         text.setFilled(true);
@@ -186,5 +187,17 @@ public class SnakeGame {
         text.setFontSize(72);
         text.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2);
         canvas.add(text);
+
+        GraphicsText playAgain = new GraphicsText("Click anywhere to play again");
+        playAgain.setFillColor(Color.WHITE);
+        playAgain.setFilled(true);
+        playAgain.setFontSize(20);
+        playAgain.setCenter(canvas.getWidth() / 2, canvas.getHeight() * 0.95);
+        canvas.add(playAgain);
+
+        canvas.onClick(event -> {
+            canvas.closeWindow();
+            main(null);
+        });
     }
 }
