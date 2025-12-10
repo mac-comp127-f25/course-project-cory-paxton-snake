@@ -175,6 +175,11 @@ public class SnakeGame {
         });
     }
 
+     /**
+     * Moves the snake forward one step based on its current direction.
+     * Also checks for collisions and sets the grow flag for the next move
+     * if the snake has eaten an apple. 
+     */
     private void moveSnake() {
         snake.move(snakeGrowsNextMove, canvas);
 
@@ -189,6 +194,10 @@ public class SnakeGame {
         }
     }
 
+    /**
+     * Checks whether the snake's head has moved outside the bounds of the grid.
+     * If so, triggers a game-over sequence.
+     */
     private void collidedWithWall() {
         int headX = snake.getSegments().get(0).getX();
         int headY = snake.getSegments().get(0).getY();
@@ -199,12 +208,21 @@ public class SnakeGame {
             }
     }
 
+    /**
+     * Checks whether the snake has run into its own body.
+     * The Snake class provides collidedWithSelf(), so this simply
+     * relays the result and ends the game if true.
+     */
     private void collidedWithSnake() {
         if(snake.collidedWithSelf()) {
             gameOver();
         }
     }
 
+    /**
+     * Checks whether the snake's head occupies the same grid square as the apple.
+     * If so, marks the snake to grow on the next movement step and respawns the apple.
+     */
     private void collidedWithFood() {
         int headX = snake.getSegments().get(0).getX();
         int headY = snake.getSegments().get(0).getY();
@@ -215,6 +233,10 @@ public class SnakeGame {
         }
     }
 
+     /**
+     * Ends the game and displays the "Game Over" screen.
+     * Shows the player's score and waits for a click to restart.
+     */
     private void gameOver() {
         gameOver = true;
 
@@ -241,6 +263,10 @@ public class SnakeGame {
         });
     }
 
+     /**
+     * Called when the player successfully fills the entire board.
+     * Displays a win message and allows the player to restart.
+     */
     private void gameWin() {
         gameOver = true;
 
