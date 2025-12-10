@@ -147,6 +147,10 @@ public class SnakeGame {
         collidedWithWall();
         collidedWithSnake();
         collidedWithFood();
+
+        if(snake.getSegments().size() == gridManager.getGridSquares().size()) {
+            gameWin();
+        }
     }
 
     private void collidedWithWall() {
@@ -182,6 +186,32 @@ public class SnakeGame {
 
         GraphicsText text = new GraphicsText("GAME OVER!\nSCORE: " + snake.getSegments().size());
         text.setFillColor(Color.RED);
+        text.setFilled(true);
+        text.setAlignment(TextAlignment.CENTER);
+        text.setFontSize(72);
+        text.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2);
+        canvas.add(text);
+
+        GraphicsText playAgain = new GraphicsText("Click anywhere to play again");
+        playAgain.setFillColor(Color.WHITE);
+        playAgain.setFilled(true);
+        playAgain.setFontSize(20);
+        playAgain.setCenter(canvas.getWidth() / 2, canvas.getHeight() * 0.95);
+        canvas.add(playAgain);
+
+        canvas.onClick(event -> {
+            canvas.closeWindow();
+            main(null);
+        });
+    }
+
+    private void gameWin() {
+        gameOver = true;
+
+        canvas.removeAll();
+
+        GraphicsText text = new GraphicsText("YOU WIN!\nSCORE: " + snake.getSegments().size());
+        text.setFillColor(Color.YELLOW);
         text.setFilled(true);
         text.setAlignment(TextAlignment.CENTER);
         text.setFontSize(72);
