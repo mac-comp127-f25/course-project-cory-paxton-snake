@@ -2,6 +2,7 @@ package snake;
 
 import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
+import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.TextAlignment;
 
@@ -28,19 +29,22 @@ public class SnakeGame {
 
     public SnakeGame() {
         canvas = new CanvasWindow("SNAKE", CANVAS_WIDTH, CANVAS_HEIGHT);
-        canvas.setBackground(Color.BLUE);
+        canvas.setBackground(Color.BLACK);
 
         gridManager = new GridManager(canvas);
         snake = new Snake(9, 9);
-
         apple = new Apple();
 
-        setupElements();
+        setupIntroduction();
 
-        setupKeyListener();
+        canvas.onClick(event -> {
+            canvas.removeAll();
+            setupElements();
+            setupKeyListener();
 
-        canvas.animate(dt -> {
-            update(dt);
+            canvas.animate(dt -> {
+                update(dt);
+            });
         });
     }
 
@@ -48,7 +52,52 @@ public class SnakeGame {
         new SnakeGame();
     }
 
-    public void setupElements() {
+    private void setupIntroduction() {
+        GraphicsText gameTitle = new GraphicsText("SNAKE 🐍");
+        gameTitle.setAlignment(TextAlignment.CENTER);
+        gameTitle.setFillColor(Color.WHITE);
+        gameTitle.setFontSize(50);
+        gameTitle.setCenter(canvas.getWidth() / 2, canvas.getHeight() * 0.08);
+        canvas.add(gameTitle);
+
+        GraphicsText gameCredits = new GraphicsText("Cory Li, Paxton Boyd");
+        gameCredits.setAlignment(TextAlignment.CENTER);
+        gameCredits.setFillColor(Color.WHITE);
+        gameCredits.setFontSize(25);
+        gameCredits.setCenter(canvas.getWidth() / 2, canvas.getHeight() * 0.15);
+        canvas.add(gameCredits);
+
+        GraphicsText gameInstructionsTitle = new GraphicsText("HOW TO PLAY");
+        gameInstructionsTitle.setAlignment(TextAlignment.LEFT);
+        gameInstructionsTitle.setFillColor(Color.WHITE);
+        gameInstructionsTitle.setFontSize(20);
+        gameInstructionsTitle.setFontStyle(FontStyle.BOLD);
+        gameInstructionsTitle.setPosition(canvas.getWidth() * 0.05, canvas.getHeight() * 0.225);
+        canvas.add(gameInstructionsTitle);
+
+        GraphicsText gameInstructions = new GraphicsText("• Use the arrow keys to control the snake\n• Avoid running into the walls or into yourself\n• Eat the apples to grow");
+        gameInstructions.setAlignment(TextAlignment.LEFT);
+        gameInstructions.setFillColor(Color.WHITE);
+        gameInstructions.setFontSize(18);
+        gameInstructions.setPosition(canvas.getWidth() * 0.05, canvas.getHeight() * 0.275);
+        canvas.add(gameInstructions);
+
+        GraphicsText luck = new GraphicsText("Good luck!");
+        luck.setAlignment(TextAlignment.CENTER);
+        luck.setFillColor(Color.WHITE);
+        luck.setFontSize(40);
+        luck.setPosition(canvas.getWidth() * 0.5, canvas.getHeight() * 0.85);
+        canvas.add(luck);
+
+        GraphicsText begin = new GraphicsText("Click anywhere to begin");
+        begin.setAlignment(TextAlignment.CENTER);
+        begin.setFillColor(Color.GRAY);
+        begin.setFontSize(15);
+        begin.setPosition(canvas.getWidth() * 0.5, canvas.getHeight() * 0.95);
+        canvas.add(begin);
+    }
+
+    private void setupElements() {
         gridManager.createGrid();
 
         for(SnakeSegment segment : snake.getSegments()) {
@@ -129,6 +178,8 @@ public class SnakeGame {
     private void gameOver() {
         gameOver = true;
 
+        canvas.removeAll();
+
         GraphicsText text = new GraphicsText("GAME OVER!\nSCORE: " + snake.getSegments().size());
         text.setFillColor(Color.RED);
         text.setFilled(true);
@@ -136,5 +187,17 @@ public class SnakeGame {
         text.setFontSize(72);
         text.setCenter(canvas.getWidth() / 2, canvas.getHeight() / 2);
         canvas.add(text);
+
+        GraphicsText playAgain = new GraphicsText("Click anywhere to play again");
+        playAgain.setFillColor(Color.WHITE);
+        playAgain.setFilled(true);
+        playAgain.setFontSize(20);
+        playAgain.setCenter(canvas.getWidth() / 2, canvas.getHeight() * 0.95);
+        canvas.add(playAgain);
+
+        canvas.onClick(event -> {
+            canvas.closeWindow();
+            main(null);
+        });
     }
 }
