@@ -33,8 +33,8 @@ public class GridManager {
         double x = 0;
         double y = 0;
 
-        int gridX = 1;
-        int gridY = 1;
+        int gridX = 0;
+        int gridY = 0;
 
         for(int i = 0; i < totalGridSquares; i++) {
             if(isEven(i)) {
@@ -53,7 +53,7 @@ public class GridManager {
 
             if(x >= canvas.getWidth()) {
                 x = 0;
-                gridX = 1;
+                gridX = 0;
                 y += gridSquare.getGraphics().getHeight();
                 gridY += 1;
             }

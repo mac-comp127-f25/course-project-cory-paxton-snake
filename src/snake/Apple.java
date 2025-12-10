@@ -21,7 +21,6 @@ public class Apple {
         Random rand = new Random();
 
         List<GridSquare> gridSquares = GridManager.getGridSquares();
-        System.out.println(gridSquares.size());
         GridSquare randGridSquare = gridSquares.get(rand.nextInt(gridSquares.size()));
 
         this.appleX = randGridSquare.getGridX();

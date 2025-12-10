@@ -4,7 +4,6 @@ import java.awt.Color;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.TextAlignment;
-import edu.macalester.graphics.events.Key;
 
 public class SnakeGame {
     private static final int CANVAS_WIDTH = 570;
@@ -34,11 +33,9 @@ public class SnakeGame {
         gridManager = new GridManager(canvas);
         snake = new Snake(9, 9);
 
-        setupElements();
-
         apple = new Apple();
-        apple.respawn();
-        canvas.add(apple.getGraphics());
+
+        setupElements();
 
         setupKeyListener();
 
@@ -57,18 +54,20 @@ public class SnakeGame {
         for(SnakeSegment segment : snake.getSegments()) {
             canvas.add(segment.getGraphics());
         }
+
+        apple.respawn();
+        canvas.add(apple.getGraphics());
     }
 
     private void update(double dt) {
         if(gameOver) {
-            return; // todo: add game over logic
+            return;
         }
 
         moveTimer += dt;
         if(moveTimer > updateInterval) {
             moveSnake();
             moveTimer = 0;
-            // updateInterval *= 0.95;
         }
     }
 
@@ -98,7 +97,6 @@ public class SnakeGame {
 
         collidedWithWall();
         collidedWithSnake();
-        // TODO: food collision
         collidedWithFood();
     }
 
