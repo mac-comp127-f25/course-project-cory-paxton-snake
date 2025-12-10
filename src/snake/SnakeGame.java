@@ -104,7 +104,7 @@ public class SnakeGame {
             canvas.add(segment.getGraphics());
         }
 
-        apple.respawn();
+        apple.respawn(snake);
         canvas.add(apple.getGraphics());
     }
 
@@ -175,7 +175,7 @@ public class SnakeGame {
 
         if(headX == apple.getX() && headY == apple.getY()) {
             snakeGrowsNextMove = true;
-            apple.respawn();
+            apple.respawn(snake);
         }
     }
 

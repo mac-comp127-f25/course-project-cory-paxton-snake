@@ -17,17 +17,37 @@ public class Apple {
         apple.setFillColor(Color.RED);
     }
 
-    public void respawn() {
+    public void respawn(Snake snake) {
         Random rand = new Random();
 
         List<GridSquare> gridSquares = GridManager.getGridSquares();
-        GridSquare randGridSquare = gridSquares.get(rand.nextInt(gridSquares.size()));
+        GridSquare randGridSquare;
+
+        while (true) {
+            randGridSquare = gridSquares.get(rand.nextInt(gridSquares.size()));
+
+            int candidateX = randGridSquare.getGridX();
+            int candidateY = randGridSquare.getGridY();
+
+            boolean collidesWithSnake = false;
+            for (SnakeSegment segment : snake.getSegments()) {
+                if (segment.getX() == candidateX && segment.getY() == candidateY) {
+                    collidesWithSnake = true;
+                    break;
+                }
+            }
+
+            if (!collidesWithSnake) {
+                break;
+            }
+        }
 
         this.appleX = randGridSquare.getGridX();
         this.appleY = randGridSquare.getGridY();
 
         int x = randGridSquare.getGridX() * GridSquare.TILE_SIZE;
         int y = randGridSquare.getGridY() * GridSquare.TILE_SIZE;
+
 
         randGridSquare.setHasFood(true);
 
