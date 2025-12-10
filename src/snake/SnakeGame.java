@@ -76,26 +76,12 @@ public class SnakeGame {
         gameInstructionsTitle.setPosition(canvas.getWidth() * 0.05, canvas.getHeight() * 0.225);
         canvas.add(gameInstructionsTitle);
 
-        GraphicsText instructOne = new GraphicsText("• Use the arrow keys to control the snake");
-        instructOne.setAlignment(TextAlignment.LEFT);
-        instructOne.setFillColor(Color.WHITE);
-        instructOne.setFontSize(18);
-        instructOne.setPosition(canvas.getWidth() * 0.05, canvas.getHeight() * 0.275);
-        canvas.add(instructOne);
-
-        GraphicsText instructTwo = new GraphicsText("• Avoid running into the walls or into yourself");
-        instructTwo.setAlignment(TextAlignment.LEFT);
-        instructTwo.setFillColor(Color.WHITE);
-        instructTwo.setFontSize(18);
-        instructTwo.setPosition(canvas.getWidth() * 0.05, canvas.getHeight() * 0.325);
-        canvas.add(instructTwo);
-
-        GraphicsText instructThree = new GraphicsText("• Eat the apples to grow");
-        instructThree.setAlignment(TextAlignment.LEFT);
-        instructThree.setFillColor(Color.WHITE);
-        instructThree.setFontSize(18);
-        instructThree.setPosition(canvas.getWidth() * 0.05, canvas.getHeight() * 0.375);
-        canvas.add(instructThree);
+        GraphicsText gameInstructions = new GraphicsText("• Use the arrow keys to control the snake\n• Avoid running into the walls or into yourself\n• Eat the apples to grow");
+        gameInstructions.setAlignment(TextAlignment.LEFT);
+        gameInstructions.setFillColor(Color.WHITE);
+        gameInstructions.setFontSize(18);
+        gameInstructions.setPosition(canvas.getWidth() * 0.05, canvas.getHeight() * 0.275);
+        canvas.add(gameInstructions);
 
         GraphicsText luck = new GraphicsText("Good luck!");
         luck.setAlignment(TextAlignment.CENTER);
