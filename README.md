@@ -7,6 +7,9 @@ Authors: Cory Li, Paxton Boyd
 
 The classic game of Snake with a new Macalester-based color scheme.
 
+<img width="702" height="737" alt="image" src="https://github.com/user-attachments/assets/592ba918-5cff-4a86-89d5-9c66f769e174" />
+
+
 ## Requirements
 
 - [Java 17/21]
