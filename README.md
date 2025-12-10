@@ -26,6 +26,9 @@ The classic game of Snake with a new Macalester-based color scheme.
 - [Macalester Color Palette]
 - DRC Workers for QA testing
 
+<img width="200" height="125" alt="image" src="https://github.com/user-attachments/assets/96530ccf-04b1-429d-849d-273205b326b1" />
+
+
 [Retro Snake]: https://playsnake.org/
 [Macalester Color Palette]: https://www.macalester.edu/communications/visual-identity/colors/
 
