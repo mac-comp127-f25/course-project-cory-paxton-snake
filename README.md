@@ -1,3 +1,37 @@
-# Project Title Goes Here
 
-Info about your project goes here
+# Snake 🐍🐍🐍
+
+Authors: Cory Li, Paxton Boyd
+
+# Description
+
+The classic game of Snake with a new Macalester-based color scheme.
+
+## Requirements
+
+- [Java 17/21]
+- [Github Desktop]
+
+[Java 17/21]: https://www.oracle.com/java/technologies/downloads/
+[Github Desktop]: https://desktop.github.com/download/
+
+## Help & Inspiration
+
+- [Retro Snake]
+- [Macalester Color Palette]
+- DRC Workers for QA testing
+
+[Retro Snake]: https://playsnake.org/
+[Macalester Color Palette]: https://www.macalester.edu/communications/visual-identity/colors/
+
+# Known Issues
+
+- Rapidly pressing arrow keys will cause the snake to go back on itself
+
+# Societal Impact
+
+While this project is a simple implementation of Snake, all software carries some unconscious bias. However, much of it is avoided in this project. No user data or information is ever collected, stored, or transmitted to any source, which means that there cannot be any misuse of private information.
+
+The game itself is accessible to vision-impaired users. It uses contrasting colors for ease of use and uses simple controls. Inputs can later be adapted for use with a joystick or other controls as well.
+
+Overall, the project has little societal impact, however, it is a good starting place to practice transparency and inclusion.
