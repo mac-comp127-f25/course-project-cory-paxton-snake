@@ -6,6 +6,12 @@ import edu.macalester.graphics.FontStyle;
 import edu.macalester.graphics.GraphicsText;
 import edu.macalester.graphics.TextAlignment;
 
+
+/**
+ * Main class for the Snake game. Manages the game loop, 
+ * input handling, UI screens, and interactions between the snake, 
+ * apple, and grid. 
+ */
 public class SnakeGame {
     private static final int CANVAS_WIDTH = 570;
     private static final int CANVAS_HEIGHT = 570;
@@ -21,12 +27,20 @@ public class SnakeGame {
     private Snake snake;
     private Apple apple;
 
+    // Tracks elapsed time between automatic snake movements.
     private double moveTimer = 0;
+
+    // Controls game speed: lower values = faster snake.
     private double updateInterval = 0.2;
 
     private boolean snakeGrowsNextMove = false;
     private boolean gameOver = false;
 
+    /**
+     * Initializes the game window, creates starting objects,
+     * and displays the introduction screen by calling setupIntroduction(). 
+     * The actual game starts when the user clicks anywhere on the window.
+     */
     public SnakeGame() {
         canvas = new CanvasWindow("SNAKE", CANVAS_WIDTH, CANVAS_HEIGHT);
         canvas.setBackground(Color.BLACK);
@@ -52,6 +66,11 @@ public class SnakeGame {
         new SnakeGame();
     }
 
+    /**
+     * Draws the game's introduction screen, including title,
+     * instructions, and credits. This method only handles UI
+     * and does not affect the game state.
+     */
     private void setupIntroduction() {
         GraphicsText gameTitle = new GraphicsText("SNAKE 🐍");
         gameTitle.setAlignment(TextAlignment.CENTER);
@@ -97,6 +116,10 @@ public class SnakeGame {
         canvas.add(begin);
     }
 
+    /**
+     * Draws the game grid, loads the snake graphics, and spawns
+     * the first apple. Called once when the game starts.
+     */
     private void setupElements() {
         gridManager.createGrid();
 
@@ -108,6 +131,14 @@ public class SnakeGame {
         canvas.add(apple.getGraphics());
     }
 
+
+     /**
+     * Called during every animation frame.
+     * Handles timing for snake movement and freezes the game
+     * immediately after a game-over event.
+     *
+     * @param dt Time elapsed since last frame
+     */
     private void update(double dt) {
         if(gameOver) {
             return;
@@ -120,6 +151,11 @@ public class SnakeGame {
         }
     }
 
+
+    /**
+     * Sets up directional input. The snake's direction can change at any time,
+     * but movement only actually happens during timed updates.
+     */
     private void setupKeyListener() {
         canvas.onKeyDown(event -> {
             switch(event.getKey()) {

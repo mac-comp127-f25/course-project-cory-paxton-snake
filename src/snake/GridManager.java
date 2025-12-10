@@ -6,6 +6,12 @@ import java.util.List;
 import edu.macalester.graphics.CanvasWindow;
 import edu.macalester.graphics.GraphicsGroup;
 
+
+/**
+ * Manages creation of the tiled grid on which the snake and apple move.
+ * Builds a 19×19 board of GridSquares and leaves the complete list global
+ * so other classes can reference grid positions.
+ */
 public class GridManager {
     private final Color LIGHT_ORANGE = Color.decode("#ffb38a");
     private final Color DARK_ORANGE = Color.decode("#ff9248");
@@ -15,6 +21,11 @@ public class GridManager {
     private GraphicsGroup grid;
     private static List<GridSquare> gridSquares;
 
+
+    /**
+     * Creates a GridManager responsible for drawing a full grid
+     * onto the provided canvas.
+     */
     public GridManager(CanvasWindow canvas) {
         gridSquares = new ArrayList<>();
         this.canvas = canvas;
@@ -62,10 +73,17 @@ public class GridManager {
         canvas.add(grid);
     }
 
+
+    /**     
+     * @return The list of all grid squares on the canvas.
+     */
     public static List<GridSquare> getGridSquares() {
         return gridSquares;
     }
 
+    /**
+     * @return true if x is even, false if odd.
+     */
     private boolean isEven(int x) {
         if(x % 2 == 0) {
             return true;
